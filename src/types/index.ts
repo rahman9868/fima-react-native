@@ -32,8 +32,14 @@ export interface AttendanceStats {
 }
 
 export interface LoginRequest {
-  email: string;
+  username: string;
   password: string;
+  grant_type: string;
+}
+
+export interface OAuthTokenResponse {
+  access_token: string;
+  refresh_token: string;
 }
 
 export interface RegisterRequest {

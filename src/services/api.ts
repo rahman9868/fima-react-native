@@ -2,7 +2,8 @@ import axios, {AxiosInstance, AxiosError} from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ApiResponse} from '../types';
 
-const API_BASE_URL = process.env.API_BASE_URL || 'https://api.fima.example.com';
+const API_BASE_URL = 'https://wf.dev.neo-fusion.com/fira-api';
+export const OAUTH_BASIC_AUTH = 'Basic ZmlyYS1hcGktY2xpZW50OnBsZWFzZS1jaGFuZ2UtdGhpcw';
 
 class ApiClient {
   private client: AxiosInstance;
@@ -61,9 +62,9 @@ class ApiClient {
     }
   }
 
-  async post<T>(url: string, data?: any): Promise<ApiResponse<T>> {
+  async post<T>(url: string, data?: any, headers?: any): Promise<ApiResponse<T>> {
     try {
-      const response = await this.client.post(url, data);
+      const response = await this.client.post(url, data, {headers});
       return {
         success: true,
         data: response.data,
