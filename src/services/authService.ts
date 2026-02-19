@@ -1,9 +1,14 @@
 import {apiClient} from './api';
-import {User, LoginRequest, RegisterRequest} from '../types';
+import {User, LoginRequest, RegisterRequest, OAuthTokenResponse} from '../types';
+import {OAUTH_BASIC_AUTH} from './api';
 
 export const authService = {
   async login(request: LoginRequest) {
-    return apiClient.post<{user: User; token: string}>('/auth/login', request);
+    return apiClient.post<OAuthTokenResponse>('/oauth/token', request, {
+      headers: {
+        'Authorization': OAUTH_BASIC_AUTH,
+      },
+    });
   },
 
   async register(request: RegisterRequest) {

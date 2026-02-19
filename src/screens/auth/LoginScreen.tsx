@@ -15,14 +15,14 @@ import {useTheme} from '../../context/ThemeContext';
 import Toast from 'react-native-toast-message';
 
 const LoginScreen: React.FC = ({navigation}: any) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const {login} = useAuth();
   const {colors} = useTheme();
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!username || !password) {
       Toast.show({
         type: 'error',
         text1: 'Error',
@@ -33,7 +33,7 @@ const LoginScreen: React.FC = ({navigation}: any) => {
 
     setIsLoading(true);
     try {
-      await login(email, password);
+      await login(username, password);
       Toast.show({
         type: 'success',
         text1: 'Success',
@@ -64,14 +64,13 @@ const LoginScreen: React.FC = ({navigation}: any) => {
 
         <View style={styles.form}>
           <View style={styles.inputContainer}>
-            <Text style={[styles.label, {color: colors.text}]}>Email</Text>
+            <Text style={[styles.label, {color: colors.text}]}>Username</Text>
             <TextInput
               style={[styles.input, {color: colors.text, borderColor: colors.border}]}
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               placeholderTextColor={colors.textSecondary}
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
+              value={username}
+              onChangeText={setUsername}
               autoCapitalize="none"
             />
           </View>
